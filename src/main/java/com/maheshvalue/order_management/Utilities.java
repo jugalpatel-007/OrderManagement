@@ -6,11 +6,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.maheshvalue.order_management.bean.jbpmprocess.ProcessRequestVO;
 import java.io.FileInputStream;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.MissingResourceException;
-import java.util.Properties;
-
+import java.util.*;
+import com.maheshvalue.order_management.bean.createInvoice.BillingDataInVO;
+import com.maheshvalue.order_management.bean.createInvoice.CreateInvoice;
 /**
  *
  * @author jugalpatel
@@ -127,6 +125,24 @@ public class Utilities implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public static String createInvoiceJson(String refDoc, String refDocCA){
+        try {
+            CreateInvoice createInvoice = new CreateInvoice();
+            List<BillingDataInVO> billingDataIn = new ArrayList<>();
+
+            BillingDataInVO billingDataInVO = new BillingDataInVO();
+            billingDataInVO.setRef_doc(refDoc);
+            billingDataInVO.setRef_doc_ca(refDocCA);
+
+            billingDataIn.add(billingDataInVO);
+            createInvoice.setBillingDataIn(billingDataIn);
+            return objectToJson(createInvoice);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 	public static void main(String[] args) {
 		String str = "{\"customer\": {\"companyCode\": \"MVPL\",\"customerNo\": \"0000100915\",\"customerDetails\": {\"piAddress\": {\"name\": \"Jugal Patel\",\"street\": \"Test Street\",\"postl_code\": \"654534\",\"city\": \"Vadodara\",\"region\": \"22\",\"country\": \"IN\",\"countrniso\": \"IN\",\"telephone\": \"8877665544\",\"langu\": \"EN\",\"langu_iso\": \"EN\",\"currency\": \"INR\",\"currency_iso\": \"INR\",\"countryiso\": \"IN\"},\"piCopyReference\": {\"salesOrg\": \"MVSO\",\"refCustmr\": \"0000100915\",\"division\": \"SD\",\"distrChan\": \"DS\"}}},\"saleOrder\": {\"orderHeaderIn\": {\"doc_type\": \"ZOR1\",\"sale_org\": \"MVSO\",\"dist_chan\": \"DS\",\"division\": \"SD\",\"date_type\": 1,\"purch_date\": \"2022-01-24\"},\"orderItemsIn\": [{\"item_number\": \"00010\",\"material\": \"000000000000500010\",\"qty\": 400},{\"item_number\": \"00020\",\"material\": \"000000000000500020\",\"qty\": 80}],\"orderPartners\": [{\"partn_role\": \"AG\",\"partn_numb\": \"0000100915\",\"itm_number\": \"000000\"}]}}";

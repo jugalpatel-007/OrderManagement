@@ -9,10 +9,8 @@ import java.io.File;
  */
 
 public interface ICommonConstants {
-    
-    public String SERVER_PROPERTY_DIR = "D:\\Jugal\\JbossJbpm\\JBPM Server\\business-central-7.47.0\\standalone\\configuration\\maheshValue.properties";
 
-	//public String SERVER_PROPERTY_DIR = System.getProperty("jboss.server.config.dir") + "/maheshValue.properties";
+	public String SERVER_PROPERTY_DIR = System.getProperty("jboss.server.config.dir") + "/maheshValue.properties";
 	
 	public String API_HOST_URL = Utilities.getProperty(SERVER_PROPERTY_DIR,"apiHostURL");
 	
@@ -29,6 +27,8 @@ public interface ICommonConstants {
 	public String  API_CREATE_DELIVERY = API_HOST_URL + "/camelServices/createDelivery";
 	
 	public String  API_CHECK_CUSTOMER_BALANCE = API_HOST_URL + "/camelServices/checkCustomerBalance";
+	
+	public String  API_CREATE_INVOICE = API_HOST_URL + "/camelServices/createInvoice";
 	
 	String CUSTOMER = "customer";
 	String COMPANY_CODE = "companyCode";
